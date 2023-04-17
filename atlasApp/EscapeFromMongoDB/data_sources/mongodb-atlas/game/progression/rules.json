@@ -1,0 +1,25 @@
+{
+    "collection": "progression",
+    "database": "game",
+    "roles": [
+        {
+            "name": "owner",
+            "apply_when": {
+                "_id": "%%user.id"
+            },
+            "fields": {
+                "name": {
+                    "write": false,
+                    "read": true
+                },
+                "score": {
+                    "write": false,
+                    "read": true
+                }
+            },
+            "insert": true,
+            "delete": true,
+            "search": true
+        }
+    ]
+}

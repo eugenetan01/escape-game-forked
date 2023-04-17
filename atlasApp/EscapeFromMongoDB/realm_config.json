@@ -1,0 +1,8 @@
+{
+    "config_version": 20210101,
+    "app_id": "escapefrommongodb-vonnz",
+    "name": "EscapeFromMongoDB",
+    "location": "SG",
+    "deployment_model": "LOCAL",
+    "environment": "production"
+}

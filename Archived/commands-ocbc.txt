@@ -1,0 +1,188 @@
+
+#Q1
+
+1) db.shipments.find({material: "Thorium", from: "Mauritius", to: "Bangladesh"}) - correct
+2) db.shipments.get({Material: "thorium", from: "mauritius", to: "bangladesh"})
+3) db.shipments.findOne({Material: "Thorium", from: "Mauritius", to: "Bangladesh"}, {quantity: 0})
+4) db.shipments.findOne({Material: "thorium", from: "mauritius", to: "Bangladesh"})
+
+-------------------------------------------------------
+
+#Q2
+
+1) - correct
+------ 
+[
+  {
+    $match: {
+      material: "Thorium",
+    },
+  },
+  {
+    $group: {
+      _id: null,
+      qty: { $sum: "$quantity" },
+    },
+  },
+  {
+    $project: {
+      _id: 0,
+      qty: 1,
+    },
+  },
+]
+
+2)
+-------
+[
+  {
+    $match: {
+      material: "Thorium",
+    },
+  },
+  {
+    $project: {
+      _id: 0,
+      qty: { $sum: "$quantity" },
+    },
+  },
+]
+
+3)
+--------
+[
+  {
+    $match: {
+      material: "Thorium",
+    },
+  },
+  {
+    $count: 'quantity'
+  }
+]
+
+4) 
+---------
+[
+  {
+    $match: {
+      material: "Thorium",
+    },
+  },
+  {
+    $sum: '$quantity'
+  }
+]
+
+
+-------------------------------------------------------
+Q3 fuzzy atlas search
+
+1)
+-------------------
+db.shipments.aggregate([
+  {
+    $search: {
+      index: 'default',
+      text: {
+        query: 'Thorium',
+        path: "material", 
+        fuzzy: {
+          "maxEdits": 2,
+        }
+      }
+    }
+  },{
+  $group: {
+      _id: 0,
+      "qty": { $sum: '$quantity' }
+   }},
+ {
+    $project:{
+        _id: 0,
+        total: "$qty",
+    }
+ } 
+])
+
+2)
+-------------------
+db.shipments.aggregate([
+  {
+    $search: {
+      index: 'default',
+      text: {
+        query: 'Thorium',
+        path: "material"
+      }
+    }
+  },{
+  $group: {
+      _id: 0,
+      "qty": { $sum: '$quantity' }
+   }},
+ {
+    $project:{
+        _id: 0,
+        total: "$qty",
+    }
+ } 
+])
+
+3)
+-------------------
+db.shipments.aggregate([
+  {
+    $search: {
+      index: 'default',
+      text: {
+        query: 'Thorium',
+        path: "material"
+      }
+    }
+  },{
+    fuzzy: {
+        "maxEdits": 2
+    }
+  },
+  {
+    $group: {
+        _id: 0,
+        "qty": { $sum: '$quantity' }
+  },
+  {
+    $project:{
+        _id: 0,
+        total: "$qty",
+    }
+  } 
+])
+
+4)
+-----------------
+db.shipments.aggregate([
+  {
+    $search: {
+      index: 'default',
+      text: {
+        query: 'Thorium',
+        path: "material"
+      }
+    }
+  },{
+    fuzzy: {
+        "maxEdits": 10
+    }
+  },
+  {
+    $group: {
+        _id: 0,
+        "qty": { $sum: '$quantity' }
+  },
+  {
+    $project:{
+        _id: 0,
+        total: "$qty",
+    }
+  } 
+])

@@ -1,0 +1,74 @@
+[
+    {
+        "name": "validateQuestionFive",
+        "private": true,
+        "run_as_system": true,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "createPlayer",
+        "private": true
+    },
+    {
+        "name": "advanceStep",
+        "private": false,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "submitAnswer",
+        "private": false
+    },
+    {
+        "name": "displayStep",
+        "private": false,
+        "run_as_system": true,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "validateQuestionTwo",
+        "private": true,
+        "run_as_system": true
+    },
+    {
+        "name": "resetPassword",
+        "private": true
+    },
+    {
+        "name": "doAdvanceStep",
+        "private": true,
+        "run_as_system": true,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "hint",
+        "private": false,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "getStepForPlayer",
+        "private": true,
+        "run_as_system": true,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "doHint",
+        "private": true,
+        "run_as_system": true,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "doSubmitAnswer",
+        "private": true,
+        "run_as_system": true
+    },
+    {
+        "name": "getUserEmail",
+        "private": false,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "currentScore",
+        "private": false,
+        "disable_arg_logs": true
+    }
+]

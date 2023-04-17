@@ -1,0 +1,152 @@
+// double check the answers 
+
+#Q1 
+db.shipments.find({material: "Thorium", from: "Mauritius", to: "Bangladesh"})
+
+-------------------------------------------------------
+
+#Q2
+
+[
+  {
+    $match: {
+      material: "Thorium",
+    },
+  },
+  {
+    $group: {
+      _id: null,
+      qty: { $sum: "$quantity" },
+    },
+  },
+  {
+    $project: {
+      _id: 0,
+      qty: 1,
+    },
+  },
+]
+
+
+-------------------------------------------------------
+//fuzzy atlas search
+
+db.shipments.aggregate([
+  {
+    $search: {
+      index: 'default',
+      text: {
+        query: 'Thorium',
+        path: {
+          'wildcard': '*'
+        }, 
+        fuzzy: {
+          "maxEdits": 2,
+        }
+      }
+    }
+  },{
+  $group: {
+      _id: 0,
+      "qty": { $sum: '$quantity' }
+   }},
+ {
+    $project:{
+        _id: 0,
+        total: "$qty",
+    }
+ } 
+])
+
+-------------------------------------------------------
+#Q4
+
+db.shipments.aggregate(
+[
+  {
+    $search: {
+      index: "default",
+      text: {
+        query: "Thorium",
+        path: {
+          wildcard: "*",
+        },
+        fuzzy: {
+          maxEdits: 2,
+        },
+      },
+    },
+  },
+  {
+    $unwind: {
+      path: "$agents",
+    },
+  },
+  {
+    $match: {
+      $expr: { $eq: ["$agents", "$recipient"] },
+    },
+  },
+])
+
+db.shipments.aggregate(
+[{
+ $search: {
+  index: 'default',
+  text: {
+   query: 'Thorium',
+   path: {
+    wildcard: '*'
+   },
+   fuzzy: {
+    maxEdits: 2
+   }
+  }
+ }
+}, {
+ $project: {
+  agents: {
+   $filter: {
+    input: '$agents',
+    as: 'agent',
+    cond: {
+     $eq: [
+      '$$agent',
+      '$recipient'
+     ]
+    }
+   }
+  }
+ }
+},{
+  $count: "num"
+}])
+-------------------------------------------------------
+
+#Q5
+
+[
+  {
+    $setWindowFields: {
+      partitionBy: "$recipient",
+      sortBy: { date: 1 },
+      output: {
+        cumulativeOutput: {
+          $sum: "$quantity",
+          window: {
+            range: [-7, 0],
+            unit: "day",
+          },
+        },
+      },
+    },
+  },
+  {
+    $sort: {
+      cumulativeOutput: -1,
+    },
+  },
+]
+
+-------------------------------------------------------
+

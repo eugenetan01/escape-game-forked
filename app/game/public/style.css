@@ -1,0 +1,60 @@
+body {
+    text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+    box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+
+    background-image: url("/logo_mdb.png");
+    background-position: bottom right;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+
+.text-green {
+    --bs-text-opacity: 1;
+    color: #00ed64;
+
+    font-family: 'Kdam Thmor Pro', sans-serif;
+}
+
+
+.cover-container {
+    max-width: 42em;
+  }
+  
+.btn-primary {
+    background-color: #00ed64;
+    border-color: #00ed64;
+    color:rgba(0, 0, 0, 1)
+}
+
+.btn-primary:hover {
+    
+}
+
+.btn-outline-primary {
+    border-color: #00ed64;
+    color: #00ed64;
+}
+
+.btn-outline-primary:focus {
+    border-color: #00ed64;
+}
+
+.btn-outline-primary:hover {
+    border-color: #00ed64;
+    background-color: #00ed64;
+    color: #000;
+}
+
+.px-3 {
+    padding-top: 5rem;
+}
+
+.score {
+    padding-bottom: 2rem;
+    text-align: right;
+}
+
+.instructions {
+    font-style: italic;
+}

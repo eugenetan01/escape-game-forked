@@ -1,0 +1,17 @@
+{
+    "properties": {
+        "_id": {
+            "bsonType": "string"
+        },
+        "current": {
+            "bsonType": "long"
+        },
+        "name": {
+            "bsonType": "string"
+        },
+        "score": {
+            "bsonType": "int"
+        }
+    },
+    "title": "progression"
+}
