@@ -1,11 +1,12 @@
-ESCAPE FROM MONGODB
-===================
+# ESCAPE FROM MONGODB
 
 ## Deploy instructions
 
-Create a cluster (M0 is sufficient) and call it EscapeFromMongoDB (__important!__) and import the game data:
+Create a cluster (M0 is sufficient) and call it EscapeFromMongoDB (**important!**) and import the game data:
 
 `mongosh "uri" --apiVersion 1 --username username gamedata.js`
+
+To see game answers and explanation for each question, see (this)[https://docs.google.com/presentation/d/1ofHYkkDV9bpy4vdVkdM3XtGh0YTv7tqmvJtDXTLIJWs/edit#slide=id.g21708ab8ba4_0_308] google slides presentation:
 
 create the Atlas application:
 
@@ -16,6 +17,7 @@ realm-cli push --remote EscapeFromMongoDB
 ```
 
 Answer the questions from realm-cli:
+
 - create a new app: yes
 - app name: as you wish, default EscapeFromMongoDB is ok
 - app location: as you wish depending on your location
@@ -63,12 +65,13 @@ For simplicity's sake, in the scripts directory there is a create-users.sh scrip
 First add your app id, group id and access token as explained on this page: https://www.mongodb.com/docs/atlas/app-services/admin/api/v3/#section/Project-and-Application-IDs
 
 The doc is a bit confusing, first you get your regular Atlas project ID, then using your Atlas API key you get a bearer token by calling the login endpoint like this:
+
 ```
 curl --request POST \
   --header 'Content-Type: application/json' \
   --header 'Accept: application/json' \
   --data '{"username": "<Public API Key>", "apiKey": "<Private API Key>"}' \
-  https://realm.mongodb.com/api/admin/v3.0/auth/providers/mongodb-cloud/login` 
+  https://realm.mongodb.com/api/admin/v3.0/auth/providers/mongodb-cloud/login`
 ```
 
 and then you can get the app id by calling the apps endpoint:
@@ -87,7 +90,6 @@ brew install pwgen
 
 Edit `create-users.sh` to add your appid, groupid and access token, then you can call it to generate users.
 
-
 For each player, create a project and a cluster (I call them "SecretData" but there's no rule).
 
 In the `scripts` directory there is a `create-projects.sh` script that lets you create a project per team. I recommend creating an organization for each run of the game, then edit the script with orgid, private and public key. It takes the same teams.txt as create-users.sh.
@@ -95,6 +97,7 @@ In the `scripts` directory there is a `create-projects.sh` script that lets you 
 Run the `create-clusters.sh` script to create the players' clusters and restore the game data set.
 
 For the Data Federation question to work:
+
 - create an S3 bucket
 - create an IAM profile that can read this bucket:
 - create the trust relationship with the players' Atlas projects
@@ -145,5 +148,6 @@ When the escape game has ended and you want to delete the clusters, you can run 
 ## Leaderboard
 
 It's very easy to design a leaderboard with Charts! It doesn't have an API (yet), so it can't be automated; but basically:
+
 - connect Charts to the admin cluster
 - the `game.progression` collection contains a `name` and a `score` properties, that you can easily build a bar chart off of. In the first run of the game we had a laptop plugged into a big screen showing the leaderboard on 1-min autorefresh, that did the trick nicely.
