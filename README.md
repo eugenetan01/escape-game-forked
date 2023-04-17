@@ -6,7 +6,7 @@ Create a cluster (M0 is sufficient) and call it EscapeFromMongoDB (**important!*
 
 `mongosh "uri" --apiVersion 1 --username username gamedata.js`
 
-To see game answers and explanation for each question, see (this)[https://docs.google.com/presentation/d/1ofHYkkDV9bpy4vdVkdM3XtGh0YTv7tqmvJtDXTLIJWs/edit#slide=id.g21708ab8ba4_0_308] google slides presentation:
+To see game answers and explanation for each question, see [this](https://docs.google.com/presentation/d/1ofHYkkDV9bpy4vdVkdM3XtGh0YTv7tqmvJtDXTLIJWs/edit#slide=id.g21708ab8ba4_0_308) google slides presentation:
 
 create the Atlas application:
 
