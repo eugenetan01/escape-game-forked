@@ -42,7 +42,7 @@ npm run build
 Copy the contents of the `build` directory to atlasApp/hosting/files
 
 ```
-cp -R build ../../atlasApp/EscapeFromMongoDB/hosting/files
+cp -R build ../../atlasApp/EscapeFromMongoDB/hosting/files --> this command moves the build dir. Instead copy out the contents of build folder to atlasApp/hosting/files dir
 ```
 
 Then you can push the hosting files:

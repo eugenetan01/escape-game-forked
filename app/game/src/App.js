@@ -4,7 +4,7 @@ import { useRealmApp, RealmAppProvider } from "./RealmApp";
 import LoginScreen from "./components/LoginScreen";
 import CurrentStep from "./components/CurrentStep";
 
-export const APP_ID = "escapefrommongodb-vonnz";
+export const APP_ID = "escapefrommongodb-jmdcb";
 
 const RequireLoggedInUser = ({ children }) => {
   const app = useRealmApp();

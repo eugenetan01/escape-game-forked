@@ -1,6 +1,6 @@
 {
     "config_version": 20210101,
-    "app_id": "appid",
+    "app_id": "escapefrommongodb-jmdcb",
     "name": "EscapeFromMongoDB",
     "location": "SG",
     "deployment_model": "LOCAL",
